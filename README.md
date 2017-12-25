@@ -98,42 +98,49 @@ docker attach x12ergykol
 ```java
 docker run "xxxxx"
 ```
-
+1.0 Interactive Mode:
 -it : interactive container with a shell.
 ```java
 docker run -it
 ```
 
+2.0 Control CPU allocation:
 --cpu-shares : controls how many CPU container can have.
 ```java
 docker run --cpu-shares=256
 //gets quarter of cpu.
 ```
 
+3.0 Control memory allocation:
 memory=1g : allocates 1g of memory to the container.
 ```java
 docker run memory=1g
 ```
 
+4.0 Detach:
 -d  : detach container in the background.
 ```java
 docker run -d ubuntu:14.04.1 /bin/bash -c "ping 8.8.8.8"
 ```
 Above command returns the container and can check by executing `docker ps` and verify the details by executing `docker inspect CONTAINER_ID`
 
+5.0 Attach:
 attach : attach the container
 ```java
 docker attach CONTAINER_ID/NAME
 ```
 container exist once the command running inside the container exists.
 
+
 #### Docker Container:
 
+1.0 Run Interactive Mode:
 ```java
 docker run -it ubuntu:14.04.1 /bin/bash
 ```
 running interactive container with ubuntu. If we want to detach from the container then we can execute `Ctl + P + Q`, so container still be running and can verify by executing `docker ps`. If we want to exist from the container then we can execute `Ctl + C`.
 
+2.0 Stop Container:
 ```java
 docker stop CONTAINER_ID
 ```
@@ -142,29 +149,33 @@ stopping the container outside the interactive terminal.
 `docker ps -l`
 shows the last container ran.
 
+3.0 Start & Attach:
 ```java
 docker start CONTAINER_ID
 docker attach CONTAINER_ID
 ```
 the first command will start the container and the second will attach the container so we can resume back to the state where we left of before stopping the container.
 
+4.0 Restart:
 ```java
 docker restart CONTAINER_ID
 ```
 this will restart the container and we can verify by executing `docker ps` and look for the timestamp.
 
+5.0 Remove/Delete Container:
 ```java
 docker stop CONTAINER_ID
 docker rm CONTAINER_ID
 ```
 we cannot remove running container by executing `rm` and hence we need to stop it. If we need to remove forcefully we can do by doing `docker rm -f CONTAINER_ID`
 
+6.0 Check Logs:
 ```java
 docker logs CONTAINER_ID
 ```
 executing this from the docker host we can see all the details about the container.
 
-Attach vs Shell:
+7.0 Attach vs Shell:
 when we do `docker attach` we are attaching to the standard streams of container PID. In here we cannot execute `shell` command and existing the container shell will exist the container as well. We can verify that by executing `docker ps`. To rescue this and run fully blown shell we do the below,
 ```java
 docker inspect CONTAINER_ID | grep Pid // returns the PID running inside the container.
@@ -174,4 +185,5 @@ but with latest version of docker we can achieve the same using `exec` command a
 ```java
 docker exec -it CONTAINER_ID /bin/bash
 ```
+     
 #### Dockerfile :
