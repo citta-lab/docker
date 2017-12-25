@@ -91,9 +91,9 @@ docker attach x12ergykol
 
 >> "Running instance of an Docker Image "
 
-#### Docker Commands
+### Docker Commands
 
-1. Docker Run:
+#### Docker Run:
 
 ```java
 docker run "xxxxx"
@@ -127,7 +127,7 @@ docker attach CONTAINER_ID/NAME
 ```
 container exist once the command running inside the container exists.
 
-2. Docker Container:
+#### Docker Container:
 
 ```java
 docker run -it ubuntu:14.04.1 /bin/bash
@@ -174,3 +174,4 @@ but with latest version of docker we can achieve the same using `exec` command a
 ```java
 docker exec -it CONTAINER_ID /bin/bash
 ```
+#### Dockerfile :
