@@ -175,7 +175,7 @@ docker logs CONTAINER_ID
 ```
 executing this from the docker host we can see all the details about the container.
 
-7.0 Attach vs Shell:
+7.0 Attach vs Shell:       
 when we do `docker attach` we are attaching to the standard streams of container PID. In here we cannot execute `shell` command and existing the container shell will exist the container as well. We can verify that by executing `docker ps`. To rescue this and run fully blown shell we do the below,
 ```java
 docker inspect CONTAINER_ID | grep Pid // returns the PID running inside the container.
@@ -185,5 +185,31 @@ but with latest version of docker we can achieve the same using `exec` command a
 ```java
 docker exec -it CONTAINER_ID /bin/bash
 ```
-     
+
 #### Dockerfile :
+When we use Dockerfile to build an image, any directories and it's child directory in Dockerfile path will be included in the image build.
+
+1.0 Prepare Dockerfile:
+```shell
+# Always start with comment
+FROM ubuntu:15.04  #should be the first command and will be the image reference it will be used to build an image.
+MAINTAINER name@gmail.com #can be put anywhere but good to be in second line.
+RUN apt-get update #Used to run command against our image we are building, each run execution will create a nee image layer etc.
+CMD ["echo", "Hello there"] #is for command to execute anytime the container is launched from the image. Here we are passing list of array strings.
+```
+2.0 Build:
+```Shell
+docker build -t nameofthebuild:0.1 .
+#-t : tag ( 0.1 will be the tag used )
+#nameofthebuild: should always be in smallcase.
+#. : period, indicating the current directory if we are in the same directory as Dockerfile
+```
+3.0 Run Container ( from built image ):
+```shell
+docker run nameofthebuild:0.1
+#this should output the echo statement 'Hello there'
+```
+
+### Other Docker Stuff:
+1. [Add cron job to Docker container](https://stackoverflow.com/questions/37015624/how-to-run-a-cron-job-inside-a-docker-container/37016878)
+2. 
