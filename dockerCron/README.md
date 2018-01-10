@@ -160,7 +160,7 @@ RUN chmod 0644 /etc/cron.d/crontab
 #call start.sh to environment variable for cron
 CMD /bin/bash /opt/project_dump/start.sh
 ```
-The IMPORTANT part of this dockerFile is that CMD is calling start.sh script, which will start the cron in foreground, which will kick start cronjob to be executed based on crontab.
+we can further clean-up the Dockerfile to have few RUN and ADD instead of adding multiple layers while building an image. The IMPORTANT part of this dockerFile is that CMD is calling start.sh script, which will start the cron in foreground, which will kick start cronjob to be executed based on crontab.
 
 5. docker directory in project structure
 ```shell
